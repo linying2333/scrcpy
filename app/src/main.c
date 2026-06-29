@@ -33,7 +33,9 @@ main_scrcpy(int argc, char *argv[]) {
 #endif
 
     printf("scrcpy " SCRCPY_VERSION
-           " <https://github.com/Genymobile/scrcpy>\n");
+           " <https://github.com/Genymobile/scrcpy>\n"
+           "fork by linying2333@github\n"
+           "This is not an official branch, do not report errors from this branch to the official.\n");
 
     struct scrcpy_cli_args args = {
         .opts = scrcpy_options_default,
