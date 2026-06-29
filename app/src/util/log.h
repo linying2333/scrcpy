@@ -38,4 +38,7 @@ sc_log_windows_error(const char *prefix, int error);
 void
 sc_log_configure(void);
 
+void
+sc_log_restore(void);
+
 #endif

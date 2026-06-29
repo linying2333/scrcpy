@@ -101,6 +101,10 @@ net_cleanup:
     net_cleanup();
 
 end:
+#ifdef _WIN32
+    sc_log_restore();
+#endif
+
     if (args.pause_on_exit == SC_PAUSE_ON_EXIT_TRUE ||
             (args.pause_on_exit == SC_PAUSE_ON_EXIT_IF_ERROR &&
                 ret != SCRCPY_EXIT_SUCCESS)) {

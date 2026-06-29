@@ -149,13 +149,27 @@ sc_sdl_log_print(void *userdata, int category, SDL_LogPriority priority,
     fprintf(out, "%s: %s\n", prio_name, message);
 }
 
+#ifdef _WIN32
+static UINT old_console_output_cp = 0;
+#endif
+
 void
 sc_log_configure(void) {
 #ifdef _WIN32
+    old_console_output_cp = GetConsoleOutputCP();
     SetConsoleOutputCP(CP_UTF8);
 #endif
 
     SDL_SetLogOutputFunction(sc_sdl_log_print, NULL);
     // Redirect FFmpeg logs to SDL logs
     av_log_set_callback(sc_av_log_callback);
+}
+
+void
+sc_log_restore(void) {
+#ifdef _WIN32
+    if (old_console_output_cp) {
+        SetConsoleOutputCP(old_console_output_cp);
+    }
+#endif
 }
