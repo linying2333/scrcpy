@@ -281,6 +281,7 @@ struct scrcpy_options {
     int16_t window_y; // SC_WINDOW_POSITION_UNDEFINED for "auto"
     uint16_t window_width;
     uint16_t window_height;
+    uint32_t disconnect_timeout;
     uint32_t display_id;
     uint32_t background_color;
     sc_tick video_buffer;

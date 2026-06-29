@@ -64,6 +64,7 @@ const struct scrcpy_options scrcpy_options_default = {
     .window_y = SC_WINDOW_POSITION_UNDEFINED,
     .window_width = 0,
     .window_height = 0,
+    .disconnect_timeout = 2,
     .display_id = 0,
     .background_color = 0x222222, // dark gray
     .video_buffer = 0,

@@ -102,6 +102,8 @@ struct sc_screen {
     bool disconnect_started;
     struct sc_disconnect disconnect;
 
+    uint32_t disconnect_timeout;
+
     // Track resize requests caused by frame-size changes
     struct sc_resize_tracker {
         sc_tick time; // 0 means none
@@ -133,6 +135,7 @@ struct sc_screen_params {
     uint16_t window_width;
     uint16_t window_height;
 
+    uint32_t disconnect_timeout;
     uint32_t background_color;
 
     bool window_aspect_ratio_lock;

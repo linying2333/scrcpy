@@ -38,6 +38,7 @@ enum {
     OPT_VIDEO_CODEC_OPTIONS,
     OPT_FORCE_ADB_FORWARD,
     OPT_DISABLE_SCREENSAVER,
+    OPT_DISCONNECT_TIMEOUT,
     OPT_SHORTCUT_MOD,
     OPT_NO_KEY_REPEAT,
     OPT_LEGACY_PASTE,
@@ -355,6 +356,14 @@ static const struct sc_option options[] = {
         .longopt_id = OPT_DISABLE_SCREENSAVER,
         .longopt = "disable-screensaver",
         .text = "Disable screensaver while scrcpy is running.",
+    },
+    {
+        .longopt_id = OPT_DISCONNECT_TIMEOUT,
+        .longopt = "disconnect-timeout",
+        .argdesc = "seconds",
+        .text = "Set the delay before exiting after an unexpected device disconnection.\n"
+                "The disconnect icon is displayed during this time.\n"
+                "Default is 2.",
     },
     {
         .longopt_id = OPT_DISPLAY_ID,
@@ -2691,6 +2700,15 @@ parse_args_with_getopt(struct scrcpy_cli_args *args, int argc, char *argv[],
                 break;
             case OPT_DISABLE_SCREENSAVER:
                 opts->disable_screensaver = true;
+                break;
+            case OPT_DISCONNECT_TIMEOUT:
+                char *endptr;
+                long timeout = strtol(optarg, &endptr, 10);
+                if (*endptr || timeout < 0) {
+                    LOGE("Invalid timeout: %s", optarg);
+                    return false;
+                }
+                opts->disconnect_timeout = (uint32_t)timeout;
                 break;
             case OPT_SHORTCUT_MOD:
                 if (!parse_shortcut_mods(optarg, &opts->shortcut_mods)) {

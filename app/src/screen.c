@@ -499,6 +499,7 @@ sc_screen_init(struct sc_screen *screen,
     screen->req.y = params->window_y;
     screen->req.width = params->window_width;
     screen->req.height = params->window_height;
+    screen->disconnect_timeout = params->disconnect_timeout;
     screen->req.fullscreen = params->fullscreen;
     screen->req.start_fps_counter = params->start_fps_counter;
 
@@ -1171,7 +1172,7 @@ sc_screen_handle_event(struct sc_screen *screen, const SDL_Event *event) {
             sc_texture_reset(&screen->tex);
             sc_screen_render(screen, true);
 
-            sc_tick deadline = sc_tick_now() + SC_TICK_FROM_SEC(2);
+            sc_tick deadline = sc_tick_now() + SC_TICK_FROM_SEC(screen->disconnect_timeout);
             static const struct sc_disconnect_callbacks cbs = {
                 .on_icon_loaded = sc_disconnect_on_icon_loaded,
                 .on_timeout = sc_disconnect_on_timeout,

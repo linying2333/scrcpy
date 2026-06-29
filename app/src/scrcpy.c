@@ -752,6 +752,7 @@ aoa_complete:
             .window_y = options->window_y,
             .window_width = options->window_width,
             .window_height = options->window_height,
+            .disconnect_timeout = options->disconnect_timeout,
             .background_color = options->background_color,
             .window_aspect_ratio_lock = options->window_aspect_ratio_lock,
             .window_borderless = options->window_borderless,
